@@ -592,6 +592,7 @@ function initRendering(tracks: MultitrackTracks, options: MultitrackOptions) {
   const scroll = document.createElement('div')
   scroll.setAttribute('style', 'width: 100%; overflow-x: scroll; overflow-y: hidden; user-select: none;')
   const wrapper = document.createElement('div')
+  wrapper.id = 'multitrack_container'
   wrapper.style.position = 'relative'
   scroll.appendChild(wrapper)
   options.container.appendChild(scroll)
@@ -607,6 +608,7 @@ function initRendering(tracks: MultitrackTracks, options: MultitrackOptions) {
   // Create containers for each track
   const containers = tracks.map((track, index) => {
     const container = document.createElement('div')
+    container.id = `multitrack_child_container_${index}`
     container.style.position = 'relative'
 
     if (track.id === PLACEHOLDER_TRACK.id) {
