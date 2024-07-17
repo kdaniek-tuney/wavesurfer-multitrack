@@ -576,7 +576,7 @@ class MultiTrack extends EventEmitter<MultitrackEvents> {
 
   public setTrackStartPosition(index: number, value: number) {
     const track = this.tracks[index]
-    if (!track.draggable) return
+    // if (!track.draggable) return
 
     const newStartPosition = value
     const minStart = this.options.dragBounds ? 0 : -this.durations[index] - 1
@@ -611,6 +611,7 @@ function initRendering(tracks: MultitrackTracks, options: MultitrackOptions) {
   const wrapper = document.createElement('div')
   wrapper.id = 'multitrack_container'
   wrapper.style.position = 'relative'
+  wrapper.style.height = '150px'
   scroll.appendChild(wrapper)
   options.container.appendChild(scroll)
 
@@ -626,7 +627,10 @@ function initRendering(tracks: MultitrackTracks, options: MultitrackOptions) {
   const containers = tracks.map((track, index) => {
     const container = document.createElement('div')
     container.id = `multitrack_child_container_${index}`
-    container.style.position = 'relative'
+    container.style.position = 'absolute'
+    if (index === 0) {
+      container.style.top = '70px'
+    }
 
     if (track.id === PLACEHOLDER_TRACK.id) {
       container.style.display = 'none'
