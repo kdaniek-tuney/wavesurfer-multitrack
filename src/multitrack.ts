@@ -680,7 +680,11 @@ function initRendering(tracks: MultitrackTracks, options: MultitrackOptions) {
       if (durations[i]) {
         container.style.width = `${durations[i] * pxPerSec}px`
       }
-      container.style.transform = `translateX(${offset}px)`
+
+      const oldTransformValue = container.style.transform.match(
+        /scaleY\(([^)]+)\)/g
+      )?.[0]
+      container.style.transform = `${oldTransformValue || ''} translateX(${offset}px)`
     })
   }
 
